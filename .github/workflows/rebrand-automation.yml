@@ -1,5 +1,4 @@
 name: Rebrand to TranDangKhoaAutomation
-# Trigger after workflow registration
 
 on:
   push:
@@ -24,6 +23,7 @@ jobs:
           import re
 
           TARGET = "TranDangKhoaAutomation"
+          WORKFLOW_PATH = ".github/workflows/rebrand-automation.yml"
           SKIP_DIRS = {".git", "node_modules", ".pio", "build", "dist", ".venv", "venv", "vendor"}
           PROTECTED_URL = re.compile(
               r"https?://[^\s\"'<>)]*(?:youtube\.com/@(?:codewithkhoa|trandangkhoatechnology)|trandangkhoatechnology\.github\.io|trandangkhoatechnology\.xyz)[^\s\"'<>)]*",
@@ -52,7 +52,7 @@ jobs:
           changed = []
           root = Path(".")
           for path in root.rglob("*"):
-              if not path.is_file() or any(part in SKIP_DIRS for part in path.parts):
+              if not path.is_file() or path.as_posix() == WORKFLOW_PATH or any(part in SKIP_DIRS for part in path.parts):
                   continue
               try:
                   raw = path.read_bytes()
@@ -68,7 +68,7 @@ jobs:
 
           paths = sorted((p for p in root.rglob("*") if p.exists()), key=lambda p: len(p.parts), reverse=True)
           for path in paths:
-              if any(part in SKIP_DIRS for part in path.parts):
+              if path.as_posix() == WORKFLOW_PATH or any(part in SKIP_DIRS for part in path.parts):
                   continue
               new_name = re.sub(r"(?i)code\s*with\s*khoa|trandangkhoatechnology", TARGET, path.name)
               if new_name == path.name:
