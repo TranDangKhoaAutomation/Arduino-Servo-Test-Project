@@ -138,6 +138,6 @@ Bạn có thể viết lại đoạn đó gọn gàng hơn, tránh lặp ý mà 
 
 This project is licensed under the [MIT License](LICENSE).  
 
-© 2025 Tran Dang Khoa (TranDangKhoaAutomation)  
+© 2025 Trần Đăng Khoa / TranDangKhoaAutomation (TranDangKhoaAutomation)  
 You may use, modify, and distribute this project freely, provided that proper attribution is given.  
 See the [LICENSE](LICENSE) file for full details.
